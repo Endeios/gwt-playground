@@ -16,6 +16,7 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 public class MyHandler implements MouseWheelHandler, MouseDownHandler,
 		MouseMoveHandler, MouseUpHandler, ClickHandler {
 
+	private static final int CANVASSIZE = 1000;
 	private boolean dragging;
 	private int mouseDownX;
 	private int mouseDownY;
@@ -26,11 +27,13 @@ public class MyHandler implements MouseWheelHandler, MouseDownHandler,
 	private int zoomLevelMin = 0;
 	private int zoomLevelMax = 100;
 	private Canvas canvas;
-	private HelloWorld panel;
+	private MyCanvasZoom panel;
 
-	public MyHandler(HelloWorld helloWorld) {
-		this.canvas = helloWorld.getCanvas();
-		this.panel = helloWorld;
+	public MyHandler(MyCanvasZoom myPanel) {
+		this.canvas = myPanel.getCanvas();
+		this.panel = myPanel;
+		canvas.setCoordinateSpaceHeight(CANVASSIZE);
+		canvas.setCoordinateSpaceWidth(CANVASSIZE);
 	}
 
 	@Override

@@ -22,13 +22,13 @@ public class HelloWorld implements EntryPoint {
 
 	private static final String urlPrefix = "http://172.25.3.54/SYSID11726/T0/FS/";
 	private static final int CANVASSIZE = 1000;
-	private Canvas canvas;
-	private String format;
-	private int zoomLevel = 8;
+	//private Canvas canvas;
+	//private String format;
+	//private int zoomLevel = 8;
 
 	private Label showZoomLevel;
-	private float yBias = 0;
-	private float xBias = 0;
+	//private float yBias = 0;
+	///private float xBias = 0;
 
 	private float fullImageXBias = 0;
 	private float fullImageYBias = 0;
@@ -42,7 +42,7 @@ public class HelloWorld implements EntryPoint {
 	private boolean enablePickPointCreation; 
 
 	public void showZoomLevel() {
-		showZoomLevel.setText("Zoom level:" + getZoomLevel());
+//		showZoomLevel.setText("Zoom level:" + getZoomLevel());
 	}
 	
 
@@ -62,35 +62,39 @@ public class HelloWorld implements EntryPoint {
 		RootPanel.get().add(testPanel);
 		final CheckBox enablePick = new CheckBox("Abilita pick");
 		RootPanel.get().add(enablePick);
-		enablePick.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-					enablePickPointCreation = enablePick.getValue();
-				
-			}
-		});
 		final TextBox zoomlvl = new TextBox();
 		RootPanel.get().add(zoomlvl);
 		output = new TextArea();
 		RootPanel.get().add(output);
-		setFormat(".jpg");
+//		setFormat(".jpg");
 		// String baseUrl = makeUrl(num);
-		canvas = Canvas.createIfSupported();
+		//canvas = Canvas.createIfSupported();
 		showZoomLevel = new Label("");
 		RootPanel.get().add(showZoomLevel);
 		showZoomLevel();
-		RootPanel.get().add(canvas);
+		myCanvasZoom = new MyCanvasZoom();
+		handler = new MyHandler(myCanvasZoom);
+		this.myCanvasZoom.getCanvas().addMouseDownHandler(handler);
+		this.myCanvasZoom.getCanvas().addMouseMoveHandler(handler);
+		this.myCanvasZoom.getCanvas().addMouseUpHandler(handler);
+		this.myCanvasZoom.getCanvas().addMouseWheelHandler(handler);
+		this.myCanvasZoom.getCanvas().addClickHandler(handler);
+		enablePick.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				myCanvasZoom.setEnablePickPointCreation(enablePick.getValue());
+//				enablePickPointCreation = enablePick.getValue();
+				
+			}
+		});
+		
+		
+		//RootPanel.get().add(canvas);
 		// int ARRAYSIZE = 8;
-		canvas.setCoordinateSpaceHeight(CANVASSIZE);
-		canvas.setCoordinateSpaceWidth(CANVASSIZE);
+		//canvas.setCoordinateSpaceHeight(CANVASSIZE);
+		//canvas.setCoordinateSpaceWidth(CANVASSIZE);
 		// RepresentZoomLevel(format, baseUrl, canvas, ARRAYSIZE);
-		this.handler = new MyHandler(this);
-		this.canvas.addMouseDownHandler(handler);
-		this.canvas.addMouseMoveHandler(handler);
-		this.canvas.addMouseUpHandler(handler);
-		this.canvas.addMouseWheelHandler(handler);
-		this.canvas.addClickHandler(handler);
 		theButton.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -98,8 +102,8 @@ public class HelloWorld implements EntryPoint {
 				String input = zoomlvl.getText();
 				Integer num = Integer.parseInt(input);
 				int myPow = num - 8;
-				representZoomLevel(getFormat(), makeUrl(num), canvas,
-						(int) Math.pow(2, myPow));
+				//representZoomLevel(getFormat(), makeUrl(num), canvas,
+						//(int) Math.pow(2, myPow));
 			}
 		});
 
@@ -114,113 +118,97 @@ public class HelloWorld implements EntryPoint {
 		return getUrlprefix() + num + "/";
 	}
 
-	public void representZoomLevel(String format, String baseUrl,
-			Canvas canvas, int ARRAYSIZE) {
+//	public void representZoomLevel(String format, String baseUrl,
+//			Canvas canvas, int ARRAYSIZE) {
+//
+//		Context2d ctx = canvas.getContext2d();
+//		ctx.clearRect(0, 0, CANVASSIZE, CANVASSIZE);
+//		String[][] map = new String[ARRAYSIZE][ARRAYSIZE];
+//		for (int i = 0; i < map.length; i++) {
+//			for (int j = 0; j < map[i].length; j++) {
+//				map[i][j] = i + "_" + j;
+//			}
+//		}
+//
+//		// for (int i = 0; i < map.length; i++) {
+//		// for (int j = 0; j < map[i].length; j++) {
+//		// RootPanel.get().add(new Label(map[i][j]));
+//		// }
+//		// }
+//		Image imap[][] = new Image[ARRAYSIZE][ARRAYSIZE];
+//		for (int i = 0; i < map.length; i++) {
+//			for (int j = 0; j < map[i].length; j++) {
+//				imap[i][j] = new Image(baseUrl + map[i][j] + format);
+//			}
+//		}
+//		ImageElement imageElement = null;
+//		for (int i = 0; i < map.length; i++) {
+//			for (int j = 0; j < map[i].length; j++) {
+//				imageElement = (ImageElement) imap[i][j].getElement().cast();
+////				oldXBias = (256 * i) + getXBias();
+////				oldYBias = (256 * j) + getYBias();
+//				ctx.drawImage(imageElement, (256 * i) + getOffsetX(), (256 * j)
+//						+ getOffsetY());
+//			}
+//		}
+//		
+//		for (PickPoint pick:getPickPoints()){
+//			ctx.setFillStyle("red");
+////			ctx.setLineWidth(5);
+////			ctx.arc(pick.getX()+getXBias(), pick.getY()+getYBias(), 2, 0, 2*Math.PI, false);
+////			ctx.closePath();
+////			ctx.fill();
+//			
+//			ctx.fillRect(pick.getX(getZoomLevel())+getOffsetX()-10, pick.getY(getZoomLevel())+getOffsetY()-10, 20, 20);
+//			//System.out.println("Printing "+pick.getX()+","+pick.getY());
+//		}
+//	}
 
-		Context2d ctx = canvas.getContext2d();
-		ctx.clearRect(0, 0, CANVASSIZE, CANVASSIZE);
-		String[][] map = new String[ARRAYSIZE][ARRAYSIZE];
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				map[i][j] = i + "_" + j;
-			}
-		}
-
-		// for (int i = 0; i < map.length; i++) {
-		// for (int j = 0; j < map[i].length; j++) {
-		// RootPanel.get().add(new Label(map[i][j]));
-		// }
-		// }
-		Image imap[][] = new Image[ARRAYSIZE][ARRAYSIZE];
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				imap[i][j] = new Image(baseUrl + map[i][j] + format);
-			}
-		}
-		ImageElement imageElement = null;
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				imageElement = (ImageElement) imap[i][j].getElement().cast();
-//				oldXBias = (256 * i) + getXBias();
-//				oldYBias = (256 * j) + getYBias();
-				ctx.drawImage(imageElement, (256 * i) + getOffsetX(), (256 * j)
-						+ getOffsetY());
-			}
-		}
-		
-		for (PickPoint pick:getPickPoints()){
-			ctx.setFillStyle("red");
-//			ctx.setLineWidth(5);
-//			ctx.arc(pick.getX()+getXBias(), pick.getY()+getYBias(), 2, 0, 2*Math.PI, false);
-//			ctx.closePath();
-//			ctx.fill();
-			
-			ctx.fillRect(pick.getX(getZoomLevel())+getOffsetX()-10, pick.getY(getZoomLevel())+getOffsetY()-10, 20, 20);
-			//System.out.println("Printing "+pick.getX()+","+pick.getY());
-		}
-	}
-
-	public float getOffsetY() {
-		return yBias;// -((int) Math.pow(2, zoomLevel- 8)/2)*256;
-	}
-
-	public float getOffsetX() {
-		return xBias;// -((int) Math.pow(2, zoomLevel- 8)/2)*256;
-	}
-
-	public void setOffsetY(float f) {
-		yBias = f;
-	}
-
-	public void setOffsetX(float f) {
-		xBias = f;
-	}
-
-	public float getFullImageXBias() {
-		return fullImageXBias;
-	}
-
-	public void setFullImageXBias(float fullImageXBias) {
-		this.fullImageXBias = fullImageXBias;
-	}
-
-	public float getFullImageYBias() {
-		return fullImageYBias;
-	}
-
-	public void setFullImageYBias(float fullImageYBias) {
-		this.fullImageYBias = fullImageYBias;
-	}
-
-
-	public Canvas getCanvas() {
-		return canvas;
-	}
-
-
-	public void setCanvas(Canvas canvas) {
-		this.canvas = canvas;
-	}
-
-
-	public int getZoomLevel() {
-		return zoomLevel;
-	}
-
-
-	public void setZoomLevel(int zoomLevel) {
-		this.zoomLevel = zoomLevel;
-	}
-
-
-	public String getFormat() {
-		return format;
-	}
-
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
+//	public float getOffsetY() {
+//		return yBias;// -((int) Math.pow(2, zoomLevel- 8)/2)*256;
+//	}
+//
+//	public float getOffsetX() {
+//		return xBias;// -((int) Math.pow(2, zoomLevel- 8)/2)*256;
+//	}
+//
+//	public void setOffsetY(float f) {
+//		yBias = f;
+//	}
+//
+//	public void setOffsetX(float f) {
+//		xBias = f;
+//	}
+//
+//
+//	public Canvas getCanvas() {
+//		return canvas;
+//	}
+//
+//
+//	public void setCanvas(Canvas canvas) {
+//		this.canvas = canvas;
+//	}
+//
+//
+//	public int getZoomLevel() {
+//		return zoomLevel;
+//	}
+//
+//
+//	public void setZoomLevel(int zoomLevel) {
+//		this.zoomLevel = zoomLevel;
+//	}
+//
+//
+//	public String getFormat() {
+//		return format;
+//	}
+//
+//
+//	public void setFormat(String format) {
+//		this.format = format;
+//	}
 
 
 	public List<PickPoint> getPickPoints() {

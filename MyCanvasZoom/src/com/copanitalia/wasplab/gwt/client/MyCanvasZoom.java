@@ -10,6 +10,7 @@ import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MyCanvasZoom extends Panel {
@@ -25,6 +26,14 @@ public class MyCanvasZoom extends Panel {
 
 	private float fullImageXBias = 0;
 	private float fullImageYBias = 0;
+	
+	public MyCanvasZoom (){
+		this.canvas = Canvas.createIfSupported();
+		this.format = ".jpg";
+		this.showZoomLevel = new Label("Zoom level");
+		RootPanel.get().add(showZoomLevel);
+		RootPanel.get().add(canvas);
+	}
 	
 	
 	private List<PickPoint>pickPoints = new ArrayList<PickPoint>();
@@ -157,7 +166,7 @@ public class MyCanvasZoom extends Panel {
 
 
 	public boolean getEnablePickPointCreation() {
-		return enablePickPointCreation;
+		return isEnablePickPointCreation();
 	}
 
 
@@ -176,4 +185,15 @@ public class MyCanvasZoom extends Panel {
 		return false;
 	}
 
+
+	public boolean isEnablePickPointCreation() {
+		return enablePickPointCreation;
+	}
+
+
+	public void setEnablePickPointCreation(boolean enablePickPointCreation) {
+		this.enablePickPointCreation = enablePickPointCreation;
+	}
+
 }
+
