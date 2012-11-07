@@ -1,0 +1,118 @@
+footer {
+	clear:both;
+}
+
+.EventQueuePictureRoutine{
+	/* background-color: gray; */
+}
+
+.EventQueuePictureRoutine ul li{
+	display: inline-table;
+}
+
+.canvaszoom{
+    background-color: black;
+    clear: both;
+	float: left;
+	position: absolute;
+	top:0em;
+	left: 0em;
+}
+.canvaszoomcontainer{
+	position: relative;
+}
+
+.editor{
+	position: relative;
+	left: 25em;
+}
+
+.media{
+        /* background-color: green;
+    border: 1px solid; */
+    float: left;
+    height: 38em;
+    left: 0;
+    margin: 0.3em !important;
+    max-width: 35.5em;
+    /* min-width: 11em; */
+    position: relative;
+    top: 0;
+}
+
+.media-mini{
+        /* background-color: green;
+    border: 1px solid; */
+    float: left;
+    height: 22em;
+    left: 0;
+    margin: 0.3em !important;
+    max-width: 17em;
+    position: relative;
+    top: 0;
+}
+.mediaContainer{
+    background-color: royalblue;
+    float: left;
+    left: 0;
+    margin: 0.3em !important;
+    position: relative;
+    top: 0;
+}
+.mainPanel{
+	float: left;
+    height: 70em;
+    left: 0;
+    margin: 0.3em !important;
+    width: 68em;
+    /* min-width: 11em; */
+    position: relative;
+    top: 0;
+    background-color: lightblue;
+}
+.choose{
+	float:left;
+}
+
+.digichoose{
+	float:left;
+}
+.select_light{
+    float: left;
+    width: 140px;
+}
+.mediasForm{
+        /* background-color: green;
+    border: 1px solid; */
+        clear: both;
+    display: block;
+    width: 100%;
+    
+}
+
+.media button.next-pic{
+	color: purple;
+}
+
+.media button.prev-pic{
+	color: purple;
+}
+.media button.next-mode{
+	color: purple;
+}
+.media button.prev-mode{
+	color: purple;
+}
+
+.list{
+	background-color: red;
+	
+}
+
+.list ul{
+	margin-left:0!important;
+    /* min-width: 22em; */
+}
+.mode{
+	clear:both;
+}
