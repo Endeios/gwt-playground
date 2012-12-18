@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MyCanvasZoom extends Panel {
-	private static final String urlPrefix = "http://172.25.3.54/SYSID11726/T0/FS/";
+	private static final String urlPrefix = "http://198.18.0.1/SYSID11726/T0/FS/";
 	private static final int CANVASSIZE = 1000;
 	private Canvas canvas;
 	private String format;
